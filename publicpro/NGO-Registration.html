@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="Css/profile.css">
+
+    <script>
+        function doprev(fileCtrl, prev) {
+            const file = fileCtrl.files[0];
+
+            if (file) {
+                prev.src = URL.createObjectURL(file);
+            }
+        }
+        function setemail() {
+
+            document.getElementById("txtemail").value = localStorage.getItem("activeuser");
+            //document.getElementById("txtemail").disabled=true;
+
+        }
+
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+
+</head>
+
+
+<body style="background-color: rgb(253, 251, 251);" onload="setemail();">
+
+    <div>
+        <center style="margin-bottom: 30px; margin-top: 5px;">
+            <h4>NGO REGISTRATION FORM</h4>
+        </center>
+    </div>
+
+    <form action="/reg-ngo" method="post" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+
+        <div class="col-md-8">
+            <label for="txtemail" class="form-label">Emailid</label>
+            <input type="email" class="form-control" name="txtemail" id="txtemail" value="mark@example.com" required readonly>
+            <br>
+
+        </div>
+
+        <div class="row">
+            <div class=" col-md-4">
+                <label for="txtname" class="form-label">NGO Name</label>
+                <input type="text" class="form-control" name="txtname" id="txtname" value="Otto" required>
+
+            </div>
+            <div class=" col-md-6">
+                <label for="regadd" class="form-label">Reg. Office</label>
+                <input type="text" class="form-control" name="regadd" id="regadd" value="Otto" required>
+
+            </div>
+            <div class=" col-md-2">
+                <label for="city" name="city" class="form-label">City</label>
+                <select class="form-select" name="city" id="city" required>
+                    <option selected disabled value="">City</option>
+                    <option value="Ahmedabad">Ahmedabad</option>
+                    <option value="Amritsar">Amritsar</option>
+                    <option value="Aurangabad">Aurangabad</option>
+                    <option value="Bathinda">Bathinda</option>
+                    <option value="Bengaluru">Bengaluru</option>
+                    <option value="Bhopal">Bhopal</option>
+                    <option value="Bhubaneswar">Bhubaneswar</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Coimbatore">Coimbatore</option>
+                    <option value="Dehradun">Dehradun</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Faridabad">Faridabad</option>
+                    <option value="Ghaziabad">Ghaziabad</option>
+                    <option value="Gurugram">Gurugram</option>
+                    <option value="Guwahati">Guwahati</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Indore">Indore</option>
+                    <option value="Jaipur">Jaipur</option>
+                    <option value="Jalandhar">Jalandhar</option>
+                    <option value="Jammu">Jammu</option>
+                    <option value="Jamshedpur">Jamshedpur</option>
+                    <option value="Kanpur">Kanpur</option>
+                    <option value="Kochi">Kochi</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Lucknow">Lucknow</option>
+                    <option value="Ludhiana">Ludhiana</option>
+                    <option value="Madurai">Madurai</option>
+                    <option value="Meerut">Meerut</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Mysuru">Mysuru</option>
+                    <option value="Nagpur">Nagpur</option>
+                    <option value="Nashik">Nashik</option>
+                    <option value="Noida">Noida</option>
+                    <option value="Patna">Patna</option>
+                    <option value="Prayagraj">Prayagraj</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Raipur">Raipur</option>
+                    <option value="Rajkot">Rajkot</option>
+                    <option value="Ranchi">Ranchi</option>
+                    <option value="Srinagar">Srinagar</option>
+                    <option value="Surat">Surat</option>
+                    <option value="Thane">Thane</option>
+                    <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                    <option value="Udaipur">Udaipur</option>
+                    <option value="Vadodara">Vadodara</option>
+                    <option value="Varanasi">Varanasi</option>
+                    <option value="Vijayawada">Vijayawada</option>
+                    <option value="Visakhapatnam">Visakhapatnam</option>
+                </select>
+                <br>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="txtmob" class="form-label">Website Link</label>
+                <div class="input-group has-validation">
+                    <input type="text" class="form-control" name="txtlink" id="txtlink"
+                        aria-describedby="inputGroupPrepend" value="No-Website" required>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="txtmob" class="form-label">Contact Number</label>
+                <div class="input-group has-validation">
+                    <input type="text" class="form-control" name="txtnum" id="txtnum"
+                        aria-describedby="inputGroupPrepend" required>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label for="txtmob" class="form-label">Since</label>
+                <div class="input-group has-validation">
+                    <input type="text" class="form-control" name="txtsin" id="txtlinksin"
+                        aria-describedby="inputGroupPrepend" required>
+
+                </div>
+                <br>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <label for="cperson" name="cperson" class="form-label">Chair Person</label>
+                <input type="text" class="form-control" name="cperson" id="cperson" required>
+            </div>
+            <div class="col-md-8">
+                <label for="nprofilew" name="nprofilew" class="form-label">NGO Works</label>
+                <input type="text" class="form-control" name="nprofilew" id="nprofilew" required>
+                <br>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <label for="regnum" name="regnum" class="form-label">Registration Number</label>
+                <input type="text" class="form-control" name="regnum" id="regnum" required>
+            </div>
+        </div>
+
+
+
+
+        <div class=" offset-md-4 col-md-4 justify-content-center">
+            <label for="validationCustom06" class="form-label">Upload Reg. Proof (Any)</label>
+            <input type="file" class="form-control" name="proofimage" id="validationCustom06"
+                onchange="doprev(this,prevproof)" required>
+            <img src="" id="prevproof" width="200px" height="150px">
+
+        </div>
+
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck">
+                    Agree to terms and conditions
+                </label>
+                <div class="invalid-feedback">
+                    You must agree before submitting.
+                </div>
+            </div>
+        </div>
+        <div class=" offset-md-3 col-md-6">
+            <center><button class="btn btn-primary" id="btnreg" type="submit">Register Now</button></center>
+        </div>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

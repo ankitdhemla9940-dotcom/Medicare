@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="Css/donor-dash.css">
+
+    <!-- Font Awesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+    <script>
+        function dologout() {
+
+            localStorage.removeItem("activeuser");
+            location.href = "/index.html";
+        }
+    </script>
+
+    <style>
+        #btnregn {
+
+            margin-right: 90px;
+        }
+    </style>
+
+</head>
+
+<body ng-app="Modulekuch" ng-controller="controllerkuch">
+
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+
+                <input type="button" id="spanlog" value="Logout" onclick="dologout();">
+            </div>
+        </div>
+    </nav>
+
+    <div class="d-flex flex-wrap justify-content-center gap-5 mt-5">
+
+        <!-- 1. Profile Card -->
+        <div class="card p-3 d-flex flex-column align-items-center text-center justify-content-between"
+            style="height: 300px; width: 200px; box-shadow: 0 12px 30px rgba(90, 105, 120, 0.28);">
+            <div class="my-auto">
+                <i class="fa-solid fa-user-gear fa-4x mb-3" style="color: #2c3e50;"></i>
+                <p style="font-size: 12px; color: #555; margin-bottom: 0;">
+                    Manage your account details, track your listings, and view request history in one place.
+                </p>
+            </div>
+            <a href="/register-ngo" class="btn btn-dark w-100">Profile</a>
+        </div>
+
+        <!-- 2. Med. Finder Card -->
+        <div class="card p-3 d-flex flex-column align-items-center text-center justify-content-between"
+            style="height: 300px; width: 200px; box-shadow: 0 12px 30px rgba(90, 105, 120, 0.28);">
+            <div class="my-auto">
+                <i class="fa-solid fa-pills fa-4x mb-3" style="color: #2c3e50;"></i>
+                <p style="font-size: 12px; color: #555; margin-bottom: 0;">
+                    Search for available donated medicines near you and connect directly with donors.
+                </p>
+            </div>
+            <a href="/search-med" class="btn btn-dark w-100">Med. Finder</a>
+        </div>
+
+        <!-- 3. Equipment Finder Card -->
+        <div class="card p-3 d-flex flex-column align-items-center text-center justify-content-between"
+            style="height: 300px; width: 200px; box-shadow: 0 12px 30px rgba(90, 105, 120, 0.28);">
+            <div class="my-auto">
+                <i class="fa-solid fa-wheelchair fa-4x mb-3" style="color: #2c3e50;"></i>
+                <p style="font-size: 12px; color: #555; margin-bottom: 0;">
+                    Locate wheelchairs, oxygen cylinders, and other essential medical equipment free of cost.
+                </p>
+            </div>
+            <a href="/search-equip" class="btn btn-dark w-100">Equipment Finder</a>
+        </div>
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

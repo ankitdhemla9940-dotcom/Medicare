@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+    <style>
+
+        #btnblock{
+
+            color:red;
+            background-color: black;
+        }
+        #btnresume{
+
+            color:green;
+            background-color: black;
+        }
+    </style>
+
+    <script>
+
+        let myModule=angular.module("Modulekuch",[]);
+        let mycontroller=myModule.controller("controllerkuch",function($scope,$http)
+        {
+
+            $scope.doShowAll=function()
+            {
+                let url="/fetch-all";
+
+                $http.get(url).then(function(resp){
+
+                    //alert(JSON.stringify(resp.data));
+                    $scope.jsonary=resp.data;
+
+                },function(err){
+
+                    alert(err);
+
+                })
+
+            }
+            $scope.doblock=function(emailidkuch)
+            {
+
+                let url="/do-block?emailkey="+emailidkuch;
+                $http.get(url).then(function(resp){
+
+                    alert(JSON.stringify(resp.data));
+
+                    $scope.doShowAll();
+
+                },function(err){
+
+                    alert(err);
+                })
+            }
+            $scope.doresume=function(emailidkuch)
+            {
+
+                let url="/do-resume?emailkey="+emailidkuch;
+                $http.get(url).then(function(resp){
+
+                    alert(JSON.stringify(resp.data));
+
+                    $scope.doShowAll();
+
+                },function(err){
+
+                    alert(err);
+                })
+            }
+        })
+
+    </script>
+
+</head>
+<body ng-app="Modulekuch" ng-controller="controllerkuch">
+    <center>
+        <h1>User's Control Panel</h1>
+        <input type="button" value="Fetch All Records" ng-click="doShowAll();">
+
+        <table width="800" border="1">
+            <tr>
+                <th>Sr.No.</th><th>Emailid</th><th>Password</th><th>UserType</th><th>Date Of Signup</th><th>Active</th><th>Status</th>
+            </tr>
+            <tr ng-repeat="obj in jsonary">
+                <td>{{$index}}</td>
+                <td>{{obj.emailid}}</td>
+                <td>{{obj.pwd}}</td>
+                <td>{{obj.utype}}</td>
+                <td>{{obj.dos}}</td>
+                <td>{{obj.activee}}</td>
+
+
+                <td>
+                    <center>
+                        <input type="button" value="Block" id="btnblock" ng-click="doblock(obj.emailid);">
+                    </center>
+                
+            
+                    <center>
+                        <input type="button" value="Un-Block" id="btnresume" ng-click="doresume(obj.emailid);">
+                    </center>
+                </td>
+                
+
+            </tr>
+               
+        </table>
+    </center>

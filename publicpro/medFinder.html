@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="Css/medfinder.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+    <script>
+
+        let myModule = angular.module("Modulekuch", []);
+        let mycontroller = myModule.controller("controllerkuch", function ($scope, $http) {
+
+            $scope.dofillcities = function () {
+                let url = "/fill-cities";
+
+                $http.get(url).then(function (resp) {
+
+                    $scope.jsonArycities = resp.data;
+
+                }, function (err) {
+
+                    alert(err);
+                })
+            }
+            $scope.showcitymed = function (city) {
+                let url = "city-med?citykey=" + city;
+
+                $http.get(url).then(function (resp) {
+
+                    $scope.jsoncitymed = resp.data;
+
+                }, function (err) {
+
+                    alert(err);
+                })
+            }
+            $scope.doShowSelMed = function (city, med) {
+
+                let url = "/med-overview?citykey=" + city + "&medkey=" + med;
+
+                $http.get(url).then(function (resp) {
+
+                    $scope.jsonmedicine = resp.data;
+
+                }, function (err) {
+
+                    alert(err);
+                })
+            }
+
+            $scope.showdetails = function (email, medicine) {
+
+                let url = "/show-detail?emailkey=" + email + "&medkey=" + medicine;
+
+                $http.get(url).then(function (resp) {
+
+                    $scope.jsondetail = resp.data;
+
+                }, function (err) {
+
+                    alert(err);
+                })
+            }
+
+
+
+        })
+    </script>
+</head>
+
+<body ng-app="Modulekuch" ng-controller="controllerkuch" ng-init="dofillcities();">
+
+
+
+    <!-- As a heading -->
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Navbar</span>
+        </div>
+    </nav>
+    <br>
+
+    <div class="row">
+
+        <div class="offset-md-3 col-md-3">
+
+            <label for="">City</label><br>
+            <select style="width: 200px;" ng-model="selcity" ng-change="showcitymed(selcity);">
+                <option ng-repeat="obj in jsonArycities" value={{obj.city}}>{{obj.city}}</option>
+            </select>
+        </div>
+
+        <div class="offset-md-1 col-md-3">
+            <label>Search Medicine</label><br>
+
+            <input list="state-list" ng-model="selmed" placeholder="Type or select...">
+            <datalist id="state-list">
+                <option ng-repeat="obj in jsoncitymed" value={{obj.medname}}>{{obj.medname}}</option>
+
+            </datalist>
+
+            <input type="button" value="Search Donor" ng-click="doShowSelMed(selcity,selmed);">
+        </div>
+    </div>
+    <br><br>
+
+    <div class="d-flex flex-wrap justify-content-center gap-5 mt-5">
+        <div class=" col-md-2" ng-repeat="obj in jsonmedicine">
+
+            <div class="card" style="width:220px; height:320px;">
+                <img src="{{obj.picurl}}" class="card-img-top" style="height:100px; width:100%; object-fit:cover;">
+
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{obj.emailid}}</h5>
+                    <p class="card-text">{{obj.company}}</p>
+                    <p class="card-text">{{obj.medname}}</p>
+
+                    <input type="button" class="btn btn-primary mt-auto align-self-center" data-bs-toggle="modal" data-bs-target="#exampleModal" ng-click="showdetails(obj.emailid,obj.medname)" value="More Details">
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Medicine Details</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-dark w-auto" border="2">
+                                <tr class="table table-dark">
+                                    <th class="table table-dark">Sr. No</th>
+                                    <th class="table table-dark">Email ID</th>
+                                    <th class="table table-dark">Medicine</th>
+                                    <th class="table table-dark">Expiry Date</th>
+                                    <th class="table table-dark">Company</th>
+                                    <th class="table table-dark">Packing</th>
+                                    <th class="table table-dark">Quantity</th>
+                                    <th class="table table-dark">Information</th>
+                                    <th class="table table-dark">Medicine Image</th>
+                                </tr>
+
+                                <tr ng-repeat="obj in jsondetail">
+
+                                    <td>{{$index+1}}</td>
+                                    <td>{{obj.emailid}}</td>
+                                    <td>{{obj.medname}}</td>
+                                    <td>{{obj.expdate}}</td>
+                                    <td>{{obj.company}}</td>
+                                    <td>{{obj.packing}}</td>
+                                    <td>{{obj.qty}}</td>
+                                    <td>{{obj.info}}</td>
+                                    <td>
+                                        <center>
+                                            <img src={{obj.picurl}} width="50px" height="50px" alt="">
+                                        </center>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

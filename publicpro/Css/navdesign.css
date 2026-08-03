@@ -1,0 +1,157 @@
+#btnsign
+{
+    background-color: rgb(147, 147, 200);
+    float:left;
+    margin-left: 1150px;
+    width:100px;
+    height: 35px;
+
+}
+#btnsign:hover{
+
+    background-color: darkgrey;
+}
+#btndash
+{
+    background-color: rgb(147, 147, 200);
+    float:left;
+    margin-right: 10px;
+    font-size: 15px;;
+    width:150px;
+    height: 35px;
+
+}
+#btndash:hover{
+
+    background-color: darkgrey;
+}
+#btnlogin{
+    background-color: rgb(147, 147, 200);
+    float:left;
+    margin-right: 10px;
+    width: 100px;
+    height: 35px;
+}
+
+#btnlogin:hover{
+
+    background-color: darkgrey;
+}
+#btnpro{
+    background-color: rgb(147, 147, 200);
+    float:right;
+    margin-right: 0px;
+    width: 100px;
+    height: 35px;
+}
+#btnnpro{
+    background-color: rgb(147, 147, 200);
+    float:right;
+    margin-right: 0px;
+    width: 100px;
+    height: 35px;
+}
+#btnfetch{
+    background-color: rgb(147, 147, 200);
+    float:right;
+    margin-right: 0px;
+    width: 200px;
+    height: 35px;
+}
+#btnsrchmed{
+    background-color: rgb(147, 147, 200);
+    float:right;
+    margin-right: 0px;
+    width: 100px;
+    height: 35px;
+}
+#btnsrchequip{
+    background-color: rgb(147, 147, 200);
+    float:right;
+    margin-right: 0px;
+    width: 150px;
+    height: 35px;
+}
+#btnpro:hover{
+
+    background-color: darkgrey;
+}
+#btnreg{
+    background-color: rgb(147, 147, 200);
+    float:right;
+    margin-left: 0px;
+
+    width: 200px;
+    height: 35px;
+}
+#btnreg:hover{
+
+    background-color: darkgrey;
+}
+#btnngo{
+    background-color: rgb(147, 147, 200);
+    float:left;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 150px;
+    height: 35px;
+}
+#btnengo:hover{
+
+    background-color: darkgrey;
+}
+.modal-header{
+
+    background-color: #2563EB;
+}
+#exampleModalLabel{
+    color: #FFFFFF;
+}
+.form-label{
+    color: #1F2937;
+}
+.form-text{
+    color:#1F2937;
+}
+.form-label{
+    color: #374151;
+}
+.form-control{
+    border: 2px #D1D5DB solid;
+}
+.btn-primary{
+    background-color: #2563EB;
+}
+.btn-secondary{
+    background-color: #6B7280;
+}
+
+#img1{
+
+    margin-left: 175px;
+    width: 100px;
+    height: 100px;
+}
+#img2{
+
+    margin-left: 175px;
+    width: 100px;
+    height: 100px;
+}
+.form-control{
+
+    width: 350px;
+}
+
+#emailHelp{
+
+    float: left;
+}
+#txtemail{
+
+    float: left;
+}
+
+
+
+

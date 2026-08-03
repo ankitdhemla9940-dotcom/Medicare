@@ -1,0 +1,49 @@
+.btn{
+
+    margin-left: 9px;
+    width: 150px;
+    background-color: #24292F;
+    color: white;
+}
+.btn:hover{
+
+    background-color:#32383F;
+    color:white;
+    box-shadow: 0px 0px 0px 3px #32383F;
+}
+
+#spanlog{
+
+    color:red;
+    margin-left: 1050px;
+    float: right;
+}
+
+#btnunlist{
+    
+    background-color: red;
+    color: black;
+}
+body{
+    margin:0;
+    padding:0;
+    background-color:#154371;
+    background-image:url("https://img.magnific.com/premium-vector/light-medical-seamless-pattern_74102-671.jpg");
+    background-size:350px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column; /* Elements ko upar-niche align karne ke liye */
+  align-items: center;    /* Center horizontally */
+  justify-content: center;/* Center vertically (agar fixed height ho) */
+  text-align: center;
+  padding: 20px;
+}
+
+/* Icon ki sizing custom CSS se handle karne ke liye (Optional) */
+.card-icon {
+  font-size: 60px; /* Aap apne hisaab se 50px - 80px set kar sakte ho */
+  margin-bottom: 20px; /* Icon aur button ke beech gap */
+  color: #2c3e50; /* Icon ka color */
+}

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="Css/profile.css">
+
+    <script>
+        function doprev(fileCtrl, prev) {
+            const file = fileCtrl.files[0];
+
+            if (file) {
+                prev.src = URL.createObjectURL(file);
+            }
+        }
+
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+
+</head>
+
+
+<body style="background-color: rgb(253, 251, 251);">
+
+    <div>
+        <center style="margin-bottom: 30px; margin-top: 5px;">
+            <h4>Avail Medicine</h4>
+        </center>
+    </div>
+
+    <form action="/avail-med" method="post" enctype="multipart/form-data" class="row g-3 needs-validation"
+        novalidate>
+
+        <div class="col-md-8">
+            <label for="txtemail" class="form-label">Emailid</label>
+            <input type="email" class="form-control" name="txtemail" id="txtemail" value="mark@example.com" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-8">
+            <label for="txtname" class="form-label">Medicine Name</label>
+            <input type="text" class="form-control" name="medname" id="medname" value="Otto" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="txtmob" class="form-label">Expiry Date</label>
+            <div class="input-group has-validation">
+                <input type="date" class="form-control" name="txtexp" id="txtexp" aria-describedby="inputGroupPrepend"
+                    required>
+                <div class="invalid-feedback">
+                    Please enter a valid Expiry Date.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="company" class="form-label">Company</label>
+            <input type="text" class="form-control" name="company" id="company" required>
+            <div class="invalid-feedback">
+                Please provide a valid Company.
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="packing" name="packing" class="form-label">Packing</label>
+            <select class="form-select" name="packing" id="packing" required>
+                <option selected disabled value="">Packing</option>
+                <option value="Sachet">Sachet</option>
+                <option value="Syrup">Syrup</option>
+                <option value="Tablets">Tablets</option>
+                <option value="Capsules">Capsules</option>
+
+            </select>
+            <div class="invalid-feedback">
+                Please select a valid Packing.
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="city" name="city" class="form-label">Qty</label>
+            <select class="form-select" name="qty" id="qty" required>
+                <option selected disabled value="">Qty</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+            </select>
+            <div class="invalid-feedback">
+                Please select a valid quantity.
+            </div>
+        </div>
+        <div class="col-md-12">
+            <label for="oinfo" name="oinfo" class="form-label">Other Information</label>
+            <input type="text" class="form-control" name="oinfo" id="oinfo" required>
+        </div>
+        <div class=" offset-md-4 col-md-4 justify-content-center">
+            <label for="validationCustom06" class="form-label">Upload Medicine Image</label>
+            <input type="file" class="form-control" name="Medimage" id="validationCustom06"
+                onchange="doprev(this,prevMed)" required>
+            <img src="" id="prevMed" width="200px" height="150px">
+            <div class="invalid-feedback">
+                Please upload a valid Aadhar card.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck">
+                    Agree to terms and conditions
+                </label>
+                <div class="invalid-feedback">
+                    You must agree before submitting.
+                </div>
+            </div>
+        </div>
+        <div class=" offset-md-3 col-md-6">
+            <center><button class="btn btn-primary" id="btnavail" type="submit">Avail Medicine</button></center>
+        </div>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

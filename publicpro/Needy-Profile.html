@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="Css/profile.css">
+
+    <script>
+        function doprev(fileCtrl, prev) {
+            const file = fileCtrl.files[0];
+
+            if (file) {
+                prev.src = URL.createObjectURL(file);
+            }
+
+        }
+        function setemail() {
+
+            document.getElementById("txtemail").value = localStorage.getItem("activeuser");
+            //document.getElementById("txtemail").disabled=true;
+
+        }
+
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("#btngetpro").click(function () {
+
+                let obj = {
+                    url: "/fetch-user",
+                    data: {
+                        emailid: $("#txtemail").val()
+                    }
+                }
+                $.ajax(obj).then(function (JSONAry) {
+
+                    alert(JSON.stringify(JSONAry));
+                    $("#prevAadhar").prop("src", JSONAry[0].acardpath);
+                    $("#prevProfile").prop("src", JSONAry[0].picpath);
+                    $("#state").val(JSONAry[0].state);
+                    $("#city").val(JSONAry[0].city);
+                    $("#txtname").val(JSONAry[0].name);
+                    $("#txtAdd").val(JSONAry[0].address);
+                    $("#txtmob").val(JSONAry[0].mobile);
+                    $("#pincode").val(JSONAry[0].pincode);
+                    //alert(typeof JSONAry[0].dob)
+                }).fail(function (err) {
+                    alert(err.message);
+                })
+            })
+        })
+    </script>
+
+
+</head>
+
+
+<body style="background-color: rgb(253, 251, 251);" onload="setemail();">
+
+    <div>
+        <center style="margin-bottom: 30px; margin-top: 5px;">
+            <h4>Needy Profile</h4>
+        </center>
+    </div>
+
+    <form action="/needy-profile" method="post" enctype="multipart/form-data" class="row g-3 needs-validation"
+        novalidate>
+
+        <div class="col-md-8">
+            <label for="txtemail" class="form-label">Emailid</label>
+            <input type="email" class="form-control" name="txtemail" id="txtemail" value="mark@example.com" required readonly>
+
+        </div>
+
+
+        <div class="col-md-4">
+            <label for="txtmob" class="form-label">Mobile Number</label>
+            <div class="input-group has-validation">
+                <span class="input-group-text" id="inputGroupPrepend">+91</span>
+                <input type="number" class="form-control" name="txtmob" id="txtmob" aria-describedby="inputGroupPrepend"
+                    required>
+
+            </div>
+        </div>
+        <div class="col-md-8">
+            <label for="txtAdd" class="form-label">Address</label>
+            <input type="text" class="form-control" name="txtAdd" id="txtAdd" required>
+
+        </div>
+        <div class="col-md-4">
+            <label for="state" name="state" class="form-label">State</label>
+            <select class="form-select" name="state" id="state" required>
+                <option disabled selected>Select a state/UT</option>
+                <option value="AP">Andhra Pradesh</option>
+                <option value="AR">Arunachal Pradesh</option>
+                <option value="AS">Assam</option>
+                <option value="BR">Bihar</option>
+                <option value="CG">Chhattisgarh</option>
+                <option value="GA">Goa</option>
+                <option value="GJ">Gujarat</option>
+                <option value="HR">Haryana</option>
+                <option value="HP">Himachal Pradesh</option>
+                <option value="JH">Jharkhand</option>
+                <option value="KA">Karnataka</option>
+                <option value="KL">Kerala</option>
+                <option value="MP">Madhya Pradesh</option>
+                <option value="MH">Maharashtra</option>
+                <option value="MN">Manipur</option>
+                <option value="ML">Meghalaya</option>
+                <option value="MZ">Mizoram</option>
+                <option value="NL">Nagaland</option>
+                <option value="OD">Odisha</option>
+                <option value="PB">Punjab</option>
+                <option value="RJ">Rajasthan</option>
+                <option value="SK">Sikkim</option>
+                <option value="TN">Tamil Nadu</option>
+                <option value="TG">Telangana</option>
+                <option value="TR">Tripura</option>
+                <option value="UP">Uttar Pradesh</option>
+                <option value="UK">Uttarakhand</option>
+                <option value="WB">West Bengal</option>
+
+                <!-- Union Territories -->
+                <option value="AN">Andaman and Nicobar Islands</option>
+                <option value="CH">Chandigarh</option>
+                <option value="DH">Dadra and Nagar Haveli and Daman and Diu</option>
+                <option value="DL">Delhi (NCT)</option>
+                <option value="JK">Jammu and Kashmir</option>
+                <option value="LA">Ladakh</option>
+                <option value="LD">Lakshadweep</option>
+                <option value="PY">Puducherry</option>
+
+            </select>
+
+        </div>
+        <div class="col-md-4">
+            <label for="city" name="city" class="form-label">City</label>
+            <select class="form-select" name="city" id="city" required>
+                <option selected disabled value="">City</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Amritsar">Amritsar</option>
+                <option value="Aurangabad">Aurangabad</option>
+                <option value="Bathinda">Bathinda</option>
+                <option value="Bengaluru">Bengaluru</option>
+                <option value="Bhopal">Bhopal</option>
+                <option value="Bhubaneswar">Bhubaneswar</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Coimbatore">Coimbatore</option>
+                <option value="Dehradun">Dehradun</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Faridabad">Faridabad</option>
+                <option value="Ghaziabad">Ghaziabad</option>
+                <option value="Gurugram">Gurugram</option>
+                <option value="Guwahati">Guwahati</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Indore">Indore</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Jalandhar">Jalandhar</option>
+                <option value="Jammu">Jammu</option>
+                <option value="Jamshedpur">Jamshedpur</option>
+                <option value="Kanpur">Kanpur</option>
+                <option value="Kochi">Kochi</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Ludhiana">Ludhiana</option>
+                <option value="Madurai">Madurai</option>
+                <option value="Meerut">Meerut</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Mysuru">Mysuru</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Nashik">Nashik</option>
+                <option value="Noida">Noida</option>
+                <option value="Patna">Patna</option>
+                <option value="Prayagraj">Prayagraj</option>
+                <option value="Pune">Pune</option>
+                <option value="Raipur">Raipur</option>
+                <option value="Rajkot">Rajkot</option>
+                <option value="Ranchi">Ranchi</option>
+                <option value="Srinagar">Srinagar</option>
+                <option value="Surat">Surat</option>
+                <option value="Thane">Thane</option>
+                <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                <option value="Udaipur">Udaipur</option>
+                <option value="Vadodara">Vadodara</option>
+                <option value="Varanasi">Varanasi</option>
+                <option value="Vijayawada">Vijayawada</option>
+                <option value="Visakhapatnam">Visakhapatnam</option>
+            </select>
+
+        </div>
+        <div class="col-md-4 offset-md-4">
+            <label for="pincode" name="pincode" class="form-label">Pin Code</label>
+            <input type="number" class="form-control" name="pincode" id="pincode" required>
+
+        </div>
+        <div class="col-md-4 offset-md-4">
+            <label for="validationCustom06" class="form-label">Upload Aadhar Card</label>
+            <input type="file" class="form-control" name="Aadharcard" id="validationCustom06"
+                onchange="doprev(this,prevAadhar)" required>
+            <img src="" id="prevAadhar" width="200px" height="200px">
+            <div class="invalid-feedback">
+                Please upload a valid Aadhar card.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck">
+                    Agree to terms and conditions
+                </label>
+                <div class="invalid-feedback">
+                    You must agree before submitting.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <center><button class="btn btn-primary" id="btnsave" type="submit">Save Profile</button></center>
+        </div>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
