@@ -1,14 +1,38 @@
-#btnsave{
-
-    width:200px;
+/* Profile / Avail form pages — add horizontal padding so content doesn't touch edges on phones */
+body {
+    padding: 0 12px;
+    box-sizing: border-box;
 }
-#btnmodify{
 
-    width:200px;
+/* Wrap the Bootstrap .row inside this to prevent negative margin bleed on mobile */
+.form-wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 8px;
 }
-#btngetpro{
 
-    width: 200px;
+#btnsave {
+    width: 100%;
+    max-width: 200px;
+}
+#btnmodify {
+    width: 100%;
+    max-width: 200px;
+}
+#btngetpro {
+    width: 100%;
+    max-width: 200px;
+    margin-top: 8px;
+}
 
-    margin-top: 31px;
+@media (max-width: 576px) {
+    /* Stack the email + button on mobile */
+    #btngetpro {
+        margin-top: 8px;
+    }
+    /* Preview images shouldn't overflow */
+    img[id^="prev"] {
+        max-width: 100%;
+        height: auto;
+    }
 }

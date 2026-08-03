@@ -114,28 +114,9 @@
 <body>
 
 
-    <!-- As a heading -->
     <nav class="navbar bg-body-secondary">
-        <div class="container-fluid" style="float:left;">
+        <div class="container-fluid">
             <span class="navbar-brand mb-0 h1">Medicare</span>
-
-            <!-- <a href="/profile"><button>Profile</button></a>
-            <a href="/avail"><button>Avail Medicine</button></a>
-            <a href="/avail-equip"><button>Avail Medical Equipment</button></a> -->
-
-            <!-- <a href="/dash-needy"><button type="button" id="btnnpro">
-                    Needy Dashboard
-                </button></a> -->
-<!-- 
-            <a href="/dash-donor"><button type="button" id="btndash">
-                    Donor's Dashboard
-                </button></a> -->
-            <!-- <a href="/dash-admin"><button type="button" id="btnfetch">
-                    Admin's Dashboard
-                </button></a> -->
-            <!-- <a href="/dash-ngo"><button type="button" id="btnsrchmed">
-                    NGO Dashboard
-                </button></a> -->
 
             <button type="button" id="btnsign" data-bs-toggle="modal" data-bs-target="#signModal">
                 Signup
@@ -143,8 +124,6 @@
             <button type="button" id="btnlogin" data-bs-toggle="modal" data-bs-target="#loginModal">
                 Login
             </button>
-
-
         </div>
     </nav>
     <br>
@@ -244,22 +223,22 @@
     <main class="flex-grow">
         <!-- 2. CAROUSEL -->
         <section id="home" class="relative bg-slate-900 text-white overflow-hidden">
-            <div id="carousel" class="relative w-full h-[450px]">
+            <div id="carousel" class="relative w-full" style="min-height:260px; height:clamp(260px,45vw,450px);">
                 <!-- Slide 1 -->
                 <div class="carousel-item active relative h-full">
                     <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1600&q=80"
                         alt="Medicines" class="w-full h-full object-cover opacity-40">
                     <div
-                        class="absolute inset-0 flex flex-col justify-center items-start max-w-7xl mx-auto px-6 lg:px-8">
+                        class="absolute inset-0 flex flex-col justify-center items-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <span
-                            class="bg-teal-500/20 text-teal-300 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 backdrop-blur-sm border border-teal-500/30">Pharmaceutical
+                            class="bg-teal-500/20 text-teal-300 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-2 backdrop-blur-sm border border-teal-500/30">Pharmaceutical
                             Excellence</span>
-                        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">Certified
-                            Quality<br>Medicines & Supplies</h1>
-                        <p class="text-slate-200 max-w-xl text-base md:text-lg mb-6">Providing verified pharmaceutical
+                        <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 leading-tight">Certified
+                            Quality<br>Medicines &amp; Supplies</h1>
+                        <p class="text-slate-200 max-w-xl text-sm sm:text-base md:text-lg mb-4 hidden sm:block">Providing verified pharmaceutical
                             products straight from globally recognized manufacturers.</p>
                         <a href="#services"
-                            class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition">Explore
+                            class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold shadow-lg transition text-sm sm:text-base">Explore
                             Products</a>
                     </div>
                 </div>
@@ -268,16 +247,16 @@
                     <img src="images/medicalequipment2.png"
                         alt="Medical Equipment" class="w-full h-full object-cover opacity-40">
                     <div
-                        class="absolute inset-0 flex flex-col justify-center items-start max-w-7xl mx-auto px-6 lg:px-8">
+                        class="absolute inset-0 flex flex-col justify-center items-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <span
-                            class="bg-cyan-500/20 text-cyan-300 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-3 backdrop-blur-sm border border-cyan-500/30">Advanced
+                            class="bg-cyan-500/20 text-cyan-300 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-2 backdrop-blur-sm border border-cyan-500/30">Advanced
                             Healthcare</span>
-                        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">Next-Gen Medical<br>Equipment
-                            & Tech</h1>
-                        <p class="text-slate-200 max-w-xl text-base md:text-lg mb-6">Equipping clinics, hospitals, and
+                        <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 leading-tight">Next-Gen Medical<br>Equipment
+                            &amp; Tech</h1>
+                        <p class="text-slate-200 max-w-xl text-sm sm:text-base md:text-lg mb-4 hidden sm:block">Equipping clinics, hospitals, and
                             homes with state-of-the-art diagnostic machinery.</p>
                         <a href="#services"
-                            class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition">View
+                            class="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold shadow-lg transition text-sm sm:text-base">View
                             Equipment</a>
                     </div>
                 </div>

@@ -1,157 +1,170 @@
-#btnsign
-{
-    background-color: rgb(147, 147, 200);
-    float:left;
-    margin-left: 1150px;
-    width:100px;
-    height: 35px;
-
+/* ============================================
+   NAVBAR BUTTONS - Responsive
+   ============================================ */
+.navbar .container-fluid {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
 }
-#btnsign:hover{
 
+#btnsign {
+    background-color: rgb(147, 147, 200);
+    margin-left: auto; /* pushes to right side naturally */
+    width: 100px;
+    height: 35px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#btnsign:hover {
     background-color: darkgrey;
 }
-#btndash
-{
+
+#btnlogin {
     background-color: rgb(147, 147, 200);
-    float:left;
-    margin-right: 10px;
-    font-size: 15px;;
-    width:150px;
+    width: 100px;
     height: 35px;
-
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
-#btndash:hover{
-
+#btnlogin:hover {
     background-color: darkgrey;
 }
-#btnlogin{
-    background-color: rgb(147, 147, 200);
-    float:left;
-    margin-right: 10px;
-    width: 100px;
-    height: 35px;
-}
 
-#btnlogin:hover{
-
-    background-color: darkgrey;
-}
-#btnpro{
+#btndash {
     background-color: rgb(147, 147, 200);
-    float:right;
-    margin-right: 0px;
-    width: 100px;
-    height: 35px;
-}
-#btnnpro{
-    background-color: rgb(147, 147, 200);
-    float:right;
-    margin-right: 0px;
-    width: 100px;
-    height: 35px;
-}
-#btnfetch{
-    background-color: rgb(147, 147, 200);
-    float:right;
-    margin-right: 0px;
-    width: 200px;
-    height: 35px;
-}
-#btnsrchmed{
-    background-color: rgb(147, 147, 200);
-    float:right;
-    margin-right: 0px;
-    width: 100px;
-    height: 35px;
-}
-#btnsrchequip{
-    background-color: rgb(147, 147, 200);
-    float:right;
-    margin-right: 0px;
+    font-size: 15px;
     width: 150px;
     height: 35px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
-#btnpro:hover{
-
+#btndash:hover {
     background-color: darkgrey;
 }
-#btnreg{
-    background-color: rgb(147, 147, 200);
-    float:right;
-    margin-left: 0px;
 
+#btnpro {
+    background-color: rgb(147, 147, 200);
+    width: 100px;
+    height: 35px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#btnnpro {
+    background-color: rgb(147, 147, 200);
+    width: 100px;
+    height: 35px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#btnfetch {
+    background-color: rgb(147, 147, 200);
     width: 200px;
     height: 35px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
-#btnreg:hover{
-
-    background-color: darkgrey;
-}
-#btnngo{
+#btnsrchmed {
     background-color: rgb(147, 147, 200);
-    float:left;
-    margin-right: 10px;
-    margin-left: 10px;
+    width: 100px;
+    height: 35px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#btnsrchequip {
+    background-color: rgb(147, 147, 200);
     width: 150px;
     height: 35px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
-#btnengo:hover{
+#btnpro:hover { background-color: darkgrey; }
 
-    background-color: darkgrey;
+#btnreg {
+    background-color: rgb(147, 147, 200);
+    width: 200px;
+    height: 35px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
-.modal-header{
+#btnreg:hover { background-color: darkgrey; }
 
+#btnngo {
+    background-color: rgb(147, 147, 200);
+    width: 150px;
+    height: 35px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#btnengo:hover { background-color: darkgrey; }
+
+/* ============================================
+   MODAL STYLES
+   ============================================ */
+.modal-header {
     background-color: #2563EB;
 }
-#exampleModalLabel{
+#exampleModalLabel {
     color: #FFFFFF;
 }
-.form-label{
-    color: #1F2937;
-}
-.form-text{
-    color:#1F2937;
-}
-.form-label{
+.form-label {
     color: #374151;
 }
-.form-control{
-    border: 2px #D1D5DB solid;
+.form-text {
+    color: #1F2937;
 }
-.btn-primary{
+.form-control {
+    border: 2px #D1D5DB solid;
+    width: 100%;   /* responsive — fills parent instead of fixed 350px */
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.btn-primary {
     background-color: #2563EB;
 }
-.btn-secondary{
+.btn-secondary {
     background-color: #6B7280;
 }
 
-#img1{
-
-    margin-left: 175px;
+/* ============================================
+   MODAL IMAGES - center responsively
+   ============================================ */
+#img1, #img2 {
+    display: block;
+    margin: 0 auto;   /* centered without fixed margin-left */
     width: 100px;
     height: 100px;
-}
-#img2{
-
-    margin-left: 175px;
-    width: 100px;
-    height: 100px;
-}
-.form-control{
-
-    width: 350px;
+    object-fit: contain;
 }
 
-#emailHelp{
-
-    float: left;
+#emailHelp {
+    display: block;
 }
-#txtemail{
-
-    float: left;
+#txtemail {
+    width: 100%;
 }
 
-
-
-
+/* ============================================
+   MOBILE BREAKPOINT - small phones
+   ============================================ */
+@media (max-width: 576px) {
+    #btnsign,
+    #btnlogin {
+        width: auto;
+        padding: 6px 14px;
+        font-size: 14px;
+    }
+    #btnsign {
+        margin-left: auto;
+    }
+}

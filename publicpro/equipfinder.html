@@ -87,42 +87,42 @@
     </nav>
     <br>
 
-    <div class="row">
+    <div class="container-fluid px-3 mt-3">
+        <div class="row g-3">
+            <div class="col-12 col-md-3 offset-md-2">
+                <label for="selcity" class="form-label">City</label>
+                <select id="selcity" class="form-select" ng-model="selcity" ng-change="showcityequip(selcity);">
+                    <option value="">-- Select City --</option>
+                    <option ng-repeat="obj in jsonArycities" value={{obj.city}}>{{obj.city}}</option>
+                </select>
+            </div>
 
-        <div class="offset-md-3 col-md-3">
-
-            <label for="">City</label><br>
-            <select style="width: 200px;" ng-model="selcity" ng-change="showcityequip(selcity);">
-                <option ng-repeat="obj in jsonArycities" value={{obj.city}}>{{obj.city}}</option>
-            </select>
-        </div>
-
-        <div class="offset-md-1 col-md-3">
-            <label>Search Equipment</label><br>
-
-            <input list="state-list" ng-model="selequip" placeholder="Type or select...">
-            <datalist id="state-list">
-                <option ng-repeat="obj in jsoncityequip" value={{obj.equipment}}>{{obj.equipment}}</option>
-
-            </datalist>
-
-            <input type="button" value="Search Donor" ng-click="doShowSelequip(selcity,selequip);">
+            <div class="col-12 col-md-4">
+                <label class="form-label">Search Equipment</label>
+                <div class="input-group">
+                    <input list="state-list" class="form-control" ng-model="selequip" placeholder="Type or select...">
+                    <datalist id="state-list">
+                        <option ng-repeat="obj in jsoncityequip" value={{obj.equipment}}>{{obj.equipment}}</option>
+                    </datalist>
+                    <button class="btn btn-primary" type="button" ng-click="doShowSelequip(selcity,selequip);">Search Donor</button>
+                </div>
+            </div>
         </div>
     </div>
     <br><br>
 
-    <div class="d-flex flex-wrap justify-content-center gap-5 mt-5">
-        <div class=" col-md-2" ng-repeat="obj in jsonequipment">
+    <div class="d-flex flex-wrap justify-content-center gap-4 mt-4 px-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="obj in jsonequipment">
 
-            <div class="card" style="width:220px; height:350px;">
+            <div class="card h-100" style="max-width:220px; margin:0 auto;">
                 <img src="{{obj.pic1url}}" class="card-img-top" style="height:100px; width:100%; object-fit:cover;">
 
                 <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{obj.emailid}}</h5>
+                    <h5 class="card-title" style="font-size:14px;">{{obj.emailid}}</h5>
                     <p class="card-text">{{obj.equipment}}</p>
                     <p class="card-text">{{obj.info}}</p>
 
-                    <input type="button" class="btn btn-primary mt-auto align-self-center" data-bs-toggle="modal" data-bs-target="#exampleModal" ng-click="doshowdetails(obj.emailid,obj.equipment)" value="More Details">
+                    <input type="button" class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#exampleModal" ng-click="doshowdetails(obj.emailid,obj.equipment)" value="More Details">
                 </div>
             </div>
             <!-- Modal -->
@@ -135,18 +135,18 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <table class="table table-dark w-auto" border="2">
+                            <div class="table-responsive">
+                            <table class="table table-dark w-100" border="2">
                                 <tr class="table table-dark">
-                                    <th class="table table-dark">Sr. No</th>
-                                    <th class="table table-dark">Email ID</th>
-                                    <th class="table table-dark">Equipment</th>
-                                    <th class="table table-dark">Condition</th>
-                                    <th class="table table-dark">Type</th>
-                                    <th class="table table-dark">Amount</th>
-                                    <th class="table table-dark">Information</th>
-                                    <th class="table table-dark">Equipment Pic1</th>
-                                    <th class="table table-dark">Equipment Pic2</th>
-                                    
+                                    <th>Sr. No</th>
+                                    <th>Email ID</th>
+                                    <th>Equipment</th>
+                                    <th>Condition</th>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Information</th>
+                                    <th>Equipment Pic1</th>
+                                    <th>Equipment Pic2</th>
                                 </tr>
 
                                 <tr ng-repeat="obj in jsondetail">
@@ -171,6 +171,7 @@
 
                                 </tr>
                             </table>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

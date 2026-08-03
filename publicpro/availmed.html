@@ -32,29 +32,30 @@
 <body style="background-color: rgb(253, 251, 251);">
 
     <div>
-        <center style="margin-bottom: 30px; margin-top: 5px;">
+        <center style="margin-bottom: 20px; margin-top: 10px;">
             <h4>Avail Medicine</h4>
         </center>
     </div>
 
+    <div class="container-fluid" style="max-width:960px;">
     <form action="/avail-med" method="post" enctype="multipart/form-data" class="row g-3 needs-validation"
         novalidate>
 
-        <div class="col-md-8">
+        <div class="col-12 col-md-8">
             <label for="txtemail" class="form-label">Emailid</label>
             <input type="email" class="form-control" name="txtemail" id="txtemail" value="mark@example.com" required>
             <div class="valid-feedback">
                 Looks good!
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-12 col-md-8">
             <label for="txtname" class="form-label">Medicine Name</label>
             <input type="text" class="form-control" name="medname" id="medname" value="Otto" required>
             <div class="valid-feedback">
                 Looks good!
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-12 col-md-4">
             <label for="txtmob" class="form-label">Expiry Date</label>
             <div class="input-group has-validation">
                 <input type="date" class="form-control" name="txtexp" id="txtexp" aria-describedby="inputGroupPrepend"
@@ -139,6 +140,7 @@
             <center><button class="btn btn-primary" id="btnavail" type="submit">Avail Medicine</button></center>
         </div>
     </form>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 </body>

@@ -97,7 +97,7 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">Medicare</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -105,19 +105,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                        <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
                     </li>
                 </ul>
-
                 <input type="button" id="spanlog" value="Logout" onclick="dologout();">
             </div>
         </div>
@@ -214,11 +204,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Email ID <input type="text" ng-model="txtemail" style="width: 594px;">
-                    <input type="button" value="Fetch" class="btn" style="width: 80px;" ng-click="doshowrecordmed(txtemail);">
-                    <br><br>
-
-                    <table width="750px" border="2">
+                    <div class="d-flex flex-wrap gap-2 mb-3 align-items-center">
+                        <label class="mb-0">Email ID</label>
+                        <input type="text" ng-model="txtemail" class="form-control flex-grow-1" style="min-width:120px;">
+                        <input type="button" value="Fetch" class="btn btn-secondary" ng-click="doshowrecordmed(txtemail);">
+                    </div>
+                    <div class="table-responsive">
+                    <table class="table table-bordered w-100">
                         <tr>
                             <th>Sr. No</th><th>Medicine Name</th><th>Expiry Date</th><th>Packing</th><th>Quantity</th><th>Action</th>
                         </tr>
@@ -235,6 +227,7 @@
                             </td>
                         </tr>
                     </table>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -253,11 +246,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Email ID <input type="text" ng-model="txtemail" style="width: 594px;">
-                    <input type="button" value="Fetch" class="btn" style="width: 80px;" ng-click="doshowrecordequip(txtemail);">
-                    <br><br>
-
-                    <table width="750px" border="2">
+                    <div class="d-flex flex-wrap gap-2 mb-3 align-items-center">
+                        <label class="mb-0">Email ID</label>
+                        <input type="text" ng-model="txtemail" class="form-control flex-grow-1" style="min-width:120px;">
+                        <input type="button" value="Fetch" class="btn btn-secondary" ng-click="doshowrecordequip(txtemail);">
+                    </div>
+                    <div class="table-responsive">
+                    <table class="table table-bordered w-100">
                         <tr>
                             <th>Sr. No</th><th>Med. Equipment</th><th>Condition</th><th>Type Of Donating</th><th>Action</th>
                         </tr>
@@ -273,6 +268,7 @@
                             </td>
                         </tr>
                     </table>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -291,11 +287,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Email ID <input type="text" ng-model="txtemail" style="width: 450px;">
-                    <br><br>
-                    Existing Password <input type="password" ng-model="expwd" style="width: 450px;">
-                    <br><br>
-                    New Password <input type="password" ng-model="newpwd" style="width: 450px;">
+                    <div class="mb-3">
+                        <label class="form-label">Email ID</label>
+                        <input type="text" ng-model="txtemail" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Existing Password</label>
+                        <input type="password" ng-model="expwd" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">New Password</label>
+                        <input type="password" ng-model="newpwd" class="form-control">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
