@@ -1,10 +1,10 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Medicare.com</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
@@ -23,6 +23,26 @@
         .carousel-item.active {
             display: block;
         }
+
+        /* Regex validation border styles */
+        .input-valid {
+            border: 2px solid #198754 !important;
+            box-shadow: 0 0 0 0.2rem rgba(25,135,84,.20) !important;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .input-invalid {
+            border: 2px solid #dc3545 !important;
+            box-shadow: 0 0 0 0.2rem rgba(220,53,69,.20) !important;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .regex-hint {
+            font-size: 0.78rem;
+            margin-top: 3px;
+            min-height: 18px;
+            transition: color 0.3s;
+        }
+        .regex-hint.valid   { color: #198754; }
+        .regex-hint.invalid { color: #dc3545; }
     </style>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -30,10 +50,63 @@
 
     <script>
 
+        /* ====== Regex patterns ====== */
+        const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+        const pwdRegex   = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/;
+
+        /* ====== Generic validator helpers ====== */
+        function validateField(inputId, hintId, regex, invalidMsg, validMsg) {
+            const val  = $("#" + inputId).val();
+            const $inp = $("#" + inputId);
+            const $hint = $("#" + hintId);
+            if (val === "") {
+                $inp.removeClass("input-valid input-invalid");
+                $hint.text("").removeClass("valid invalid");
+                return;
+            }
+            if (regex.test(val)) {
+                $inp.removeClass("input-invalid").addClass("input-valid");
+                $hint.text(validMsg).removeClass("invalid").addClass("valid");
+            } else {
+                $inp.removeClass("input-valid").addClass("input-invalid");
+                $hint.text(invalidMsg).removeClass("valid").addClass("invalid");
+            }
+        }
+
         $(document).ready(function () {
 
-            $("#btnsig").click(function () {
+            /* ---- Signup Email ---- */
+            $("#txtemail").on("input blur", function () {
+                validateField(
+                    "txtemail", "sigEmailHint", emailRegex,
+                    "Invalid email format (e.g. user@example.com)",
+                    "Valid email ✓"
+                );
+            });
 
+            /* ---- Signup Email blur → check availability ---- */
+            $("#txtemail").blur(function () {
+                if (!emailRegex.test($("#txtemail").val())) return; // skip if invalid
+                let obj = {
+                    url: "/check-email",
+                    data: { emailid: $("#txtemail").val() }
+                };
+                $.ajax(obj).then(function (respstr) {
+                    $("#emailHelp").html(respstr);
+                }).fail(function (err) { alert(err.message); });
+            });
+
+            /* ---- Signup Password ---- */
+            $("#txtpwd").on("input", function () {
+                validateField(
+                    "txtpwd", "sigPwdHint", pwdRegex,
+                    "Min 8 chars, uppercase, lowercase, digit & special char required",
+                    "Strong password ✓"
+                );
+            });
+
+            /* ---- Signup Submit ---- */
+            $("#btnsig").click(function () {
                 let obj = {
                     url: "/signup-process",
                     data: {
@@ -41,71 +114,57 @@
                         pwd: $("#txtpwd").val(),
                         utype: $("#exampleusertype1").val()
                     }
-                }
+                };
                 $.ajax(obj).then(function (respstr) {
-
-                    //alert(respstr);
                     $("#msgspansig").html(respstr);
+                }).fail(function (err) { alert(err.message); });
+            });
 
-                }).fail(function (err) {
-                    alert(err.message);
-                })
-            })
-            $("#txtemail").blur(function () {
+            /* ---- Login Email ---- */
+            $("#exampleInputEmail2").on("input", function () {
+                validateField(
+                    "exampleInputEmail2", "logEmailHint", emailRegex,
+                    "Invalid email format (e.g. user@example.com)",
+                    "Valid email ✓"
+                );
+            });
 
-                let obj = {
-                    url: "/check-email",
-                    data: {
-                        emailid: $("#txtemail").val()
-                    }
-                }
-                $.ajax(obj).then(function (respstr) {
+            /* ---- Login Password ---- */
+            $("#exampleInputPassword1").on("input", function () {
+                validateField(
+                    "exampleInputPassword1", "logPwdHint", pwdRegex,
+                    "Min 8 chars, uppercase, lowercase, digit & special char required",
+                    "Strong password ✓"
+                );
+            });
 
-                    //alert(respstr);
-                    $("#emailHelp").html(respstr);
-
-                }).fail(function (err) {
-                    alert(err.message);
-                })
-
-            })
+            /* ---- Login Submit ---- */
             $("#btnlog").click(function () {
-
                 let obj = {
                     url: "/login-process",
                     data: {
                         emailid: $("#exampleInputEmail2").val(),
                         pwd: $("#exampleInputPassword1").val()
                     }
-                }
+                };
                 $.ajax(obj).then(function (respstr) {
-
                     alert(respstr);
                     $("#msgspanlog").html(respstr);
 
-                    if(respstr=="Donor")
-                    {
-                        location.href="/dash-donor.html";
-                        localStorage.setItem("activeuser",$("#exampleInputEmail2").val());
+                    if (respstr == "Donor") {
+                        location.href = "/dash-donor.html";
+                        localStorage.setItem("activeuser", $("#exampleInputEmail2").val());
                     }
-
-                    if(respstr=="Needy")
-                    {
-                        location.href="/dash-needy.html";
-                        localStorage.setItem("activeuser",$("#exampleInputEmail2").val());
+                    if (respstr == "Needy") {
+                        location.href = "/dash-needy.html";
+                        localStorage.setItem("activeuser", $("#exampleInputEmail2").val());
                     }
-
-                    if(respstr=="NGO")
-                    {
-                        location.href="/dash-ngo.html";
-                        localStorage.setItem("activeuser",$("#exampleInputEmail2").val());
+                    if (respstr == "NGO") {
+                        location.href = "/dash-ngo.html";
+                        localStorage.setItem("activeuser", $("#exampleInputEmail2").val());
                     }
-
-                }).fail(function (err) {
-                    alert(err.message);
-                })
-
-            })
+                }).fail(function (err) { alert(err.message); });
+            });
         })
     </script>
 
@@ -116,7 +175,7 @@
 
     <nav class="navbar bg-body-secondary">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">Medicare</span>
+            <a class="navbar-brand d-flex align-items-center gap-2 text-decoration-none" href="/index.html" style="gap:10px;"><img src="images/medicare-logo.png" alt="Medicare Logo" style="height:38px;width:38px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(13,148,136,0.4));"><span style="font-size:1.35rem;font-weight:800;background:linear-gradient(135deg,#0d9488,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.5px;">Medicare</span></a>
 
             <button type="button" id="btnsign" data-bs-toggle="modal" data-bs-target="#signModal">
                 Signup
@@ -147,16 +206,17 @@
                                 <label for="txtemail" class="form-label">Email address</label>
                                 <br>
                                 <input type="email" class="form-control" name="txtemail" id="txtemail"
-                                    aria-describedby="emailHelp">
+                                    aria-describedby="emailHelp" autocomplete="email">
+                                <span id="sigEmailHint" class="regex-hint"></span>
                                 <span id="emailHelp" class="form-text">*</span>
                             </p>
                         </div>
-                        <br><br>
+                        
                         <div class="mb-3">
                             <p>
                                 <label for="txtpwd" class="form-label">Password</label>
-                                <input type="password" class="form-control" name="txtpwd" id="txtpwd">
-
+                                <input type="password" class="form-control" name="txtpwd" id="txtpwd" autocomplete="new-password">
+                                <span id="sigPwdHint" class="regex-hint"></span>
                             </p>
                         </div>
                         <div class="mb-3">
@@ -201,11 +261,13 @@
                         <div class="mb-3">
                             <label for="exampleemailid1" class="form-label">Email Id</label>
                             <input type="email" class="form-control" id="exampleInputEmail2" name="txtemail"
-                                aria-describedby="emailHelp1">
+                                aria-describedby="emailHelp1" autocomplete="email">
+                            <span id="logEmailHint" class="regex-hint"></span>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control" name="txtpwd" id="exampleInputPassword1">
+                            <input type="password" class="form-control" name="txtpwd" id="exampleInputPassword1" autocomplete="current-password">
+                            <span id="logPwdHint" class="regex-hint"></span>
                         </div>
                         <div class="modal-footer">
                             <input type="button" class="btn btn-secondary" data-bs-dismiss="modal" value="Cancel">
@@ -369,7 +431,7 @@
                         class="bg-slate-50 border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
                         <div
                             class="w-32 h-32 rounded-xl bg-slate-300 flex-shrink-0 overflow-hidden border-2 border-cyan-600 shadow">
-                            <img src="" alt="Developer Photo" class="w-full h-full object-cover">
+                            <img src="images/developer-avatar.png" alt="Developer Photo" class="w-full h-full object-cover">
                         </div>
                         <div class="flex-1 text-center sm:text-left">
                             <h3 class="text-xs uppercase font-bold tracking-wider text-cyan-600 mb-1">Meet The Developer
@@ -454,3 +516,4 @@
 </body>
 
 </html>
+
