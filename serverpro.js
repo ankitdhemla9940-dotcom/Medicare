@@ -829,7 +829,7 @@ Do not return markdown, no extra text.`;
 
     // Call Gemini REST API directly (v1 endpoint supports all key formats)
     const geminiResp = await fetch(
-        `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+        `https://generativelanguage.googleapis.com/v1/models/gemini-3.6-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
         {
             method: "POST",
             headers: { "Content-Type": "application/json" },
