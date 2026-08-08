@@ -837,7 +837,7 @@ Do not return markdown.
     const imageBuffer = await imageResp.arrayBuffer();
 
     const result = await ai.models.generateContent({
-        model: "gemini-3.6-flash",
+        model: "gemini-1.5-flash",
         contents: [{
             parts: [
                 {
@@ -868,54 +868,58 @@ Do not return markdown.
 
 app.post("/n-profile", async function (req, resp) {
 
-    let jsonResultFromAi;
-    let msg = "File not Uploaded";
-    let myUrl = "nopic.jpg";
-    if (req.files != null) {
+    try {
+        if (req.files == null || !req.files.Aadharcard) {
+            return resp.send("Please upload your Aadhar card image.");
+        }
+
+        // 1. Upload Aadhar image to local disk
         let fileName = req.files.Aadharcard.name;
         let fullPath = __dirname + "/uploads/" + fileName;
         await req.files.Aadharcard.mv(fullPath);
-        msg = "Uploaded Successfully";
 
-        await cloudinary.uploader.upload(fullPath).then(async function (picUrlResult) {
-            myUrl = picUrlResult.url;   //will give u the url of ur pic on cloudinary server
-            console.log("************")
-            console.log(myUrl);
-            jsonResultFromAi = await RajeshBansalKaChirag(myUrl);
-            if (jsonResultFromAi == null) {
-                return resp.send("Unable to extract Aadhaar details from Gemini.");
+        // 2. Upload to Cloudinary
+        let picUrlResult = await cloudinary.uploader.upload(fullPath);
+        let myUrl = picUrlResult.url;
+        console.log("Cloudinary URL:", myUrl);
+
+        // 3. Extract Aadhaar details via Gemini AI
+        let jsonResultFromAi = await RajeshBansalKaChirag(myUrl);
+        if (jsonResultFromAi == null) {
+            return resp.send("Unable to extract Aadhaar details from image. Please upload a clear Aadhar card photo.");
+        }
+        console.log("Gemini AI Result:", jsonResultFromAi);
+
+        let name  = jsonResultFromAi.name;
+        let adhno = jsonResultFromAi.adhaar_number;
+        let gen   = jsonResultFromAi.gender;
+        let dob   = jsonResultFromAi.dob;
+
+        // Convert DD/MM/YYYY → YYYY/MM/DD for MySQL DATE field
+        const formatted = dob ? dob.split("/").reverse().join("/") : null;
+
+        let email = req.body.txtemail;
+        let mob   = req.body.txtmob;
+        let addr  = req.body.txtAdd;
+        let state = req.body.state;
+        let city  = req.body.city;
+        let pin   = req.body.pincode;
+
+        // 4. Save to database
+        mycon.query(
+            "insert into needys values(?,?,?,?,?,?,?,?,?,?,?)",
+            [email, mob, myUrl, name, adhno, addr, state, city, pin, gen, formatted],
+            function (err) {
+                if (err == null)
+                    resp.send("Needy Profile Saved Successsfulllyyyy");
+                else
+                    resp.send(err.message);
             }
-            console.log(jsonResultFromAi);
-            //resp.send(jsonResultFromAi);
+        );
 
-        });
-
+    } catch (err) {
+        console.error("Error in /n-profile:", err);
+        resp.send("Error: " + err.message);
     }
-
-
-
-    let name = jsonResultFromAi.name;
-    let adhno = jsonResultFromAi.adhaar_number;
-    let gen = jsonResultFromAi.gender;
-    let dob = jsonResultFromAi.dob;
-
-    const formatted = dob.split("/").reverse().join("/");
-
-    let email = req.body.txtemail;
-    let mob = req.body.txtmob;
-    let addr = req.body.txtAdd;
-    let state = req.body.state;
-    let city = req.body.city;
-    let pin = req.body.pincode;
-
-
-    mycon.query("insert into needys values(?,?,?,?,?,?,?,?,?,?,?)", [email, mob, myUrl, name, adhno, addr, state, city, pin, gen, formatted], function (err) {
-        if (err == null)
-            resp.send("Needy Profile Saved Successsfulllyyyy");
-        else
-            resp.send(err.message);
-    })
-
-
 
 })
