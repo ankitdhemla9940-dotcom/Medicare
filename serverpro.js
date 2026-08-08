@@ -29,7 +29,7 @@ var mysql = require("mysql2");
 
 require("dotenv").config();
 console.log("Gemini key exists:", !!process.env.GEMINI_API_KEY);
-console.log("Gemini key:", process.env.GEMINI_API_KEY);
+
 
 let url = process.env.AIVEN_URL;
 
@@ -809,60 +809,57 @@ app.get("/NGO-details", function (req, resp) {
 //==============================================
 
 
-const { GoogleGenAI } = require("@google/genai");
-
-const ai = new GoogleGenAI({
-    apiKey: process.env.GEMINI_API_KEY   // or your API key
-});
-
-
+// Gemini AI via direct REST API (avoids SDK v1beta auth issues with AQ. keys)
 async function RajeshBansalKaChirag(imgurl) {
 
-    const myprompt = `
-Extract the following details from the Aadhaar card.
-
-Return ONLY valid JSON.
-
+    const myprompt = `Extract the following details from the Aadhaar card.
+Return ONLY valid JSON in this exact format:
 {
   "adhaar_number":"",
   "name":"",
   "gender":"",
   "dob":""
 }
+Do not return markdown, no extra text.`;
 
-Do not return markdown.
-`;
-
+    // Download the Aadhaar image from Cloudinary
     const imageResp = await fetch(imgurl);
     const imageBuffer = await imageResp.arrayBuffer();
+    const base64Image = Buffer.from(imageBuffer).toString("base64");
 
-    const result = await ai.models.generateContent({
-        model: "gemini-1.5-flash",
-        contents: [{
-            parts: [
-                {
-                    inlineData: {
-                        mimeType: "image/jpeg",
-                        data: Buffer.from(imageBuffer).toString("base64")
-                    }
-                },
-                {
-                    text: myprompt
-                }
-            ]
-        }]
-    });
+    // Call Gemini REST API directly (v1 endpoint supports all key formats)
+    const geminiResp = await fetch(
+        `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [
+                        {
+                            inline_data: {
+                                mime_type: "image/jpeg",
+                                data: base64Image
+                            }
+                        },
+                        { text: myprompt }
+                    ]
+                }]
+            })
+        }
+    );
 
-    console.log(result);
+    const geminiData = await geminiResp.json();
+    console.log("Gemini raw response:", JSON.stringify(geminiData));
 
-    const text =
-        result.text ||
-        result.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!geminiResp.ok) {
+        throw new Error("Gemini API error: " + JSON.stringify(geminiData));
+    }
 
-    console.log(text);
+    const text = geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
+    console.log("Gemini extracted text:", text);
 
     const cleaned = text.replace(/```json|```/g, "").trim();
-
     return JSON.parse(cleaned);
 }
 
