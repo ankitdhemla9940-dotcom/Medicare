@@ -827,12 +827,16 @@ Do not return markdown, no extra text.`;
     const imageBuffer = await imageResp.arrayBuffer();
     const base64Image = Buffer.from(imageBuffer).toString("base64");
 
-    // Call Gemini REST API directly (v1 endpoint supports all key formats)
+    // Call Gemini REST API directly
+    // AQ. keys must use x-goog-api-key header (not ?key= query param)
     const geminiResp = await fetch(
-        `https://generativelanguage.googleapis.com/v1/models/gemini-3.6-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+        "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent",
         {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "x-goog-api-key": process.env.GEMINI_API_KEY
+            },
             body: JSON.stringify({
                 contents: [{
                     parts: [
