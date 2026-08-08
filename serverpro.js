@@ -124,7 +124,7 @@ app.get("/profile", function (req, resp) {
 })
 app.get("/n-profile", function (req, resp) {
 
-    var path = __dirname + "/publicpro/Needy-profile.html";
+    var path = __dirname + "/publicpro/Needy-Profile.html";
     resp.sendFile(path);
 })
 app.get("/dash-donor", function (req, resp) {
