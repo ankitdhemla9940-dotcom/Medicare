@@ -5,10 +5,16 @@ var app = express();
 app.use(express.static("publicpro"));
 app.use(express.urlencoded({ extended: true }));
 
-app.listen(3000, function () {
+// app.listen(3000, function () {
 
-    console.log("Server Started");
-})
+//     console.log("Server Started");
+// })
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, "0.0.0.0", function () {
+    console.log("Server Started on port " + PORT);
+});
 
 app.get("/", function (req, resp) {
 
