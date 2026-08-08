@@ -830,7 +830,7 @@ Do not return markdown, no extra text.`;
     // Call Gemini REST API directly
     // AQ. keys must use x-goog-api-key header (not ?key= query param)
     const geminiResp = await fetch(
-        "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent",
+        "https://generativelanguage.googleapis.com/v1/models/gemini-3.6-flash:generateContent",
         {
             method: "POST",
             headers: {
