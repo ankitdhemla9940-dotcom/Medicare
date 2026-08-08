@@ -22,6 +22,8 @@ var mysql = require("mysql2");
 
 
 require("dotenv").config();
+console.log("Gemini key exists:", !!process.env.GEMINI_API_KEY);
+console.log("Gemini key:", process.env.GEMINI_API_KEY);
 
 let url = process.env.AIVEN_URL;
 
@@ -186,7 +188,7 @@ app.post("/save-profile", async function (req, resp) {
 
     mycon.query("insert into dprofiles values(?,?,?,?,?,?,?,?,?)", [emailid, name, mobile, address, state, city, pincode, myAUrl, myPUrl], function (err) {
         if (err == null)
-            resp.send("Badhai!!!! Donor Profile Saved Successsfulllyyyy");
+            resp.send("Donor Profile Saved Successsfulllyyyy");
         else
             resp.send(err.message);
     })
@@ -234,7 +236,7 @@ app.post("/modify-profile", async function (req, resp) {
         mycon.query("update dprofiles set name=?,mobile=?,address=?,state=?,city=?,pincode=? where emailid=?", [name, mobile, address, state, city, pincode, emailid], function (err) {
 
             if (err == null)
-                resp.send(" Congo!! Data Updated Successfully");
+                resp.send("Data Updated Successfully");
             else
                 resp.send(err.message);
         })
@@ -243,7 +245,7 @@ app.post("/modify-profile", async function (req, resp) {
         mycon.query("update dprofiles set name=?,mobile=?,address=?,state=?,city=?,pincode=?, picpath=? where emailid=?", [name, mobile, address, state, city, pincode, myPUrl, emailid], function (err) {
 
             if (err == null)
-                resp.send(" Congo!! Data Updated Successfully");
+                resp.send("Data Updated Successfully");
             else
                 resp.send(err.message);
         })
@@ -252,7 +254,7 @@ app.post("/modify-profile", async function (req, resp) {
         mycon.query("update dprofiles set name=?,mobile=?,address=?,state=?,city=?,pincode=?,acardpath=? where emailid=?", [name, mobile, address, state, city, pincode, myAUrl, emailid], function (err) {
 
             if (err == null)
-                resp.send(" Congo!! Data Updated Successfully");
+                resp.send("Data Updated Successfully");
             else
                 resp.send(err.message);
         })
@@ -261,7 +263,7 @@ app.post("/modify-profile", async function (req, resp) {
         mycon.query("update dprofiles set name=?,mobile=?,address=?,state=?,city=?,pincode=?,acardpath=?,picpath=? where emailid=?", [name, mobile, address, state, city, pincode, myAUrl, myPUrl, emailid], function (err) {
 
             if (err == null)
-                resp.send(" Congo!! Data Updated Successfully");
+                resp.send("Data Updated Successfully");
             else
                 resp.send(err.message);
         })
@@ -807,6 +809,7 @@ const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY   // or your API key
 });
 
+
 async function RajeshBansalKaChirag(imgurl) {
 
     const myprompt = `
@@ -857,7 +860,7 @@ Do not return markdown.
     return JSON.parse(cleaned);
 }
 
-app.post("/needy-profile", async function (req, resp) {
+app.post("/n-profile", async function (req, resp) {
 
     let jsonResultFromAi;
     let msg = "File not Uploaded";
@@ -902,7 +905,7 @@ app.post("/needy-profile", async function (req, resp) {
 
     mycon.query("insert into needys values(?,?,?,?,?,?,?,?,?,?,?)", [email, mob, myUrl, name, adhno, addr, state, city, pin, gen, formatted], function (err) {
         if (err == null)
-            resp.send("Badhai!!!! Needy Profile Saved Successsfulllyyyy");
+            resp.send("Needy Profile Saved Successsfulllyyyy");
         else
             resp.send(err.message);
     })
